@@ -1,0 +1,139 @@
+/* * {
+  margin: 0;
+  padding: 0;
+}
+.app-sidebar {
+  padding: 40px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.app-sidebar {
+  transform: translateX(100%);
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+}
+.show2 {
+    transform: translateX(0);
+    opacity: 1;
+    margin-left: 0;
+  }
+  transform: translateX(300px); */
+
+
+  /* Modal Background */
+.modal {
+    /*display: none;  Hidden by default */
+    position: fixed; /* Fixed position */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding-top: 0px;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: white;
+    margin: 5% auto; /* Center the modal */
+    padding: 4px;
+    border-radius: 8px;
+    width: 80%; /* Adjust width as needed */
+    max-width: 500px; /* Maximum width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Close Button */
+  .close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+  }
+  
+  /* Close Button Hover */
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Modal Title */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #007BFF;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218838;
+  }
+#createProjectForm{
+    padding: 2%;
+}
+.modal-content{
+    margin-top: -1px;
+}
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .modal-content {
+      width: 90%;
+    }
+  
+    .form-group input {
+      font-size: 14px;
+    }
+  
+    .submit-btn {
+      font-size: 14px;
+    }
+  }
