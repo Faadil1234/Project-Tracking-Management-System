@@ -447,7 +447,7 @@ display: flex;
 flex-wrap: wrap;
 }
 .project-boxes.jsGridView .project-box-wrapper {
-width: 33.3%;
+width: 30.3%;
 }
 .project-boxes.jsListView .project-box {
 display: flex;
@@ -498,10 +498,9 @@ order: 3;
 flex: 1;
 }
 .project-box {
---main-color-card: #dbf6fd;
+/* --main-color-card: #dbf6fd; */
 border-radius: 30px;
 padding: 16px;
-background-color: var(--main-color-card);
 }
 .project-box-header {
 display: flex;
@@ -663,7 +662,7 @@ display: none;
 }
 @media screen and (max-width: 980px) {
 .project-boxes.jsGridView .project-box-wrapper {
-width: 50%;
+width: 32%;
 }
 .status-number, .status-type {
 font-size: 14px;
@@ -814,6 +813,70 @@ top: 10px;
         font-size: 12px;
         background-color: var(--app-container);
     }
+
+.more-option{
+    display: none;
+    position: fixed; /* Fixed position */
+    z-index: 1; /* Sit on top */
+    /* left: 100%; */
+    /* top: 255px; */
+    width: 10%; /* Full width */
+    height: 10%; /* Full height */
+    background-color:var(--main-color); /* Semi-transparent background */
+    /* color: black; */
+    padding-top: 0px;
+    border-radius: 10px;
+    padding-right: 0;
+}
+.more-option li{
+  color: var(--app-container);
+    margin-left: 0px;
+    padding-left: 0px;
+    font-size: 15px;
+   
+}
+.remove-btn , .edit-btn{
+  cursor: pointer;
+}
+.more-option .close-btn {
+  color: var(--app-container);
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+
+/*Edit modal Form*/
+.modalEdit {
+  display: none;  /*Hidden by default */
+  position: fixed; /* Fixed position */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding-top: 0px;
+ 
+}
+
+
+
+/*drop down style*/
+select {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+}
+.select-label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+
+
 
 
 

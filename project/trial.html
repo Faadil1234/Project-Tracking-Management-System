@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="trial.css">
-</head>
-<body>
-    <div>
-        <!-- Project Creation Modal -->
-        <div class="modal" id="projectModal">
-            <div class="modal-content">
-                <span class="close-btn" id="closeModalBtn">&times;</span>
-                <h2>Create New Project</h2>
-                <form id="createProjectForm">
-                    <div class="form-group">
-                        <label for="projectName">Project Name</label>
-                        <input type="text" id="projectName" name="projectName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="projectDate">Start Date :</label>
-                        <input type="date" id="projectDate" required><br><br>
-                    </div>
-                    <div class="form-group">
-                        <label for="projectDate">Deadline : </label>
-                        <input type="date" id="projectDate" required><br><br>
-                    </div>
-                    <div class="form-group">
-                        <label for="projectProgress">Progress (in %):</label>
-                        <input type="number" id="projectProgress" placeholder="Enter progress percentage" min="0" max="100"  required><br><br>
-                    </div>
-                    <div class="form-group">
-                        <label for="projectDaysLeft">Days Left:</label>
-                        <input type="number" id="projectDaysLeft" placeholder="Enter days left" required><br><br>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="submit-btn">Create Project</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
 
-    <script src="script2.js"></script>
-</body>
+  <body>
+    <label for="myDropdown">Choose an option:</label>
+    <select id="myDropdown" onchange="insertInputField()">
+      <option value="none">Select an option</option>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+    
+    <!-- The input field will be inserted here -->
+    <div id="inputContainer"></div>
+    
+    <script>
+
+      function insertInputField() {
+        const dropdown = document.getElementById('myDropdown');
+        const inputContainer = document.getElementById('inputContainer');
+        const selectedValue = dropdown.value;
+      
+        // Clear any previously inserted input field
+        inputContainer.innerHTML = '';
+      
+        // Check which option is selected and insert the input accordingly
+        if (selectedValue === 'option1') {
+          const input1 = document.createElement('input');
+          input1.type = 'text';
+          input1.placeholder = 'Enter text for Option 1';
+          inputContainer.appendChild(input1);
+        } else if (selectedValue === 'option2') {
+          const input2 = document.createElement('input');
+          input2.type = 'number';
+          input2.placeholder = 'Enter a number for Option 2';
+          inputContainer.appendChild(input2);
+        } else if (selectedValue === 'option3') {
+          const input3 = document.createElement('input');
+          input3.type = 'date';
+          input3.placeholder = 'Select a date for Option 3';
+          inputContainer.appendChild(input3);
+        }
+      }
+      
+    </script>
+  </body>
+ 
 </html>
-
-

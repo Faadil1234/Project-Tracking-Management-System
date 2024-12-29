@@ -1,30 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var modeSwitch = document.querySelector(".mode-switch");
-  modeSwitch.addEventListener("click", function () {
+    var modeSwitch = document.querySelector(".mode-switch");
+    modeSwitch.addEventListener("click", function () {
     document.documentElement.classList.toggle("dark");
     modeSwitch.classList.toggle("active");
-  });
-  var listView = document.querySelector(".list-view");
-  var gridView = document.querySelector(".grid-view");
-  var projectsList = document.querySelector(".project-boxes");
-  listView.addEventListener("click", function () {
+    });
+    var listView = document.querySelector(".list-view");
+    var gridView = document.querySelector(".grid-view");
+    var projectsList = document.querySelector(".project-boxes");
+    listView.addEventListener("click", function () {
     gridView.classList.remove("active");
     listView.classList.add("active");
     projectsList.classList.remove("jsGridView");
     projectsList.classList.add("jsListView");
-  });
-  gridView.addEventListener("click", function () {
+    });
+    gridView.addEventListener("click", function () {
     gridView.classList.add("active");
     listView.classList.remove("active");
     projectsList.classList.remove("jsListView");
     projectsList.classList.add("jsGridView");
-  });
-  document
+   });
+    document
     .querySelector(".messages-btn")
     .addEventListener("click", function () {
       document.querySelector(".messages-section").classList.add("show");
     });
-  document
+    document
     .querySelector(".messages-close")
     .addEventListener("click", function () {
       document.querySelector(".messages-section").classList.remove("show");
@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     });
+     
 
 
 
 
-    
         // Get modal and button elements
         const modal = document.getElementById("projectModal");
         const createProjectBtn = document.getElementById("createProjectBtn");
@@ -54,8 +54,58 @@ document.addEventListener("DOMContentLoaded", function () {
         createProjectBtn.addEventListener("click", function () {
           modal.style.display = "block"; // Show the modal
           creareproject.classList.toggle("static");
+
+          
         });
-      
+        function insertInputField() {
+          const dropdown = document.getElementById('projectProgress');
+          const inputContainer = document.getElementById('inputContainer');
+          const selectedValue = dropdown.value;
+          let input2 = document.createElement('input');
+          let input3 = document.createElement('label');
+
+          let progressValue = 0;
+          let UpcomingDate = "";
+          // Clear any previously inserted input field
+          inputContainer.innerHTML = '';
+        
+          // Check which option is selected and insert the input accordingly
+          if (selectedValue === 'Upcoming') {
+            // const input1 = document.createElement('input');
+            input3.textContent = 'Enter the date this project will start :'
+            input2.type = 'Date';
+            input2.placeholder = 'Enter text for Option 1';
+            input2.id = "dynamic-input";
+            inputContainer.appendChild(input3);
+            inputContainer.appendChild(input2);
+          } else if (selectedValue === 'In Progress') {
+            input2.type = 'number';
+            input2.placeholder = `Enter the progress in %`;
+            input2.id = "dynamic-input";
+            inputContainer.appendChild(input2);
+          } 
+          
+        }
+  
+        document.querySelector("select").addEventListener("change", insertInputField);
+
+        
+        function getInputValue() {
+          const inputField = document.getElementById("dynamic-input");
+          if (inputField) {
+            const inputValue = inputField.value;
+  
+          } else {
+            alert("No dropdown input field value available");
+          }
+         
+        }
+        // document.querySelector("createProjectForm").addEventListener("submit", getInputValue);
+
+   
+
+   
+
         // Close the modal when the close button is clicked
         closeModalBtn.addEventListener("click", function () {
           modal.style.display = "none"; // Hide the modal
@@ -67,11 +117,17 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display = "none"; // Hide the modal
           }
         });
-      
-        // Handle form submission for creating a project
+       
+        var count = 0;
+
+
+        // ************Handle form submission for creating a project******************************
+
         createProjectForm.addEventListener("submit", function (event) {
           event.preventDefault(); // Prevent default form submission
-      
+          count += 1;
+          const status = document.querySelector(".status-number")
+          status.innerHTML = `${count}`
           // Get form values
           const projectName = document.getElementById("projectName").value;
           const projectStartDate = document.getElementById("projectDate").value; // Start date
@@ -84,14 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Please fill in all fields before creating a project.");
             return;
           }
-      
-          // Create a new project element with the form data
+          getInputValue();
+          // **********Create a new project element with the form data***************************
+
           const newProject = document.createElement("div");
           newProject.classList.add("project-box-wrapper");
           newProject.innerHTML =  `
-          <div class="project-box" style="background-color: #fee4cb;">
+          <div class="project-box" >
               <div class="project-box-header">
-                  <span>${projectStartDate}</span>
+                  <span class="project-Date">${projectStartDate}</span>
                   <div class="more-wrapper">
                       <button class="project-btn-more">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -102,7 +159,15 @@ document.addEventListener("DOMContentLoaded", function () {
                               <circle cx="12" cy="5" r="1" />
                               <circle cx="12" cy="19" r="1" />
                           </svg>
+                              
                       </button>
+                              <div class="more-option">
+                                <span class="close-btn" id="closeModalBtn">&times;</span>
+                                  <ul style="list-style: none;">
+                                      <li class="remove-btn">remove</li>
+                                      <li class="edit-btn">edit</li>
+                                  </ul>
+                              </div>
                   </div>
               </div>
               <div class="project-box-content-header">
@@ -114,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <div class="box-progress-bar">
                       <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
                   </div>
-                  <p class="box-progress-percentage">${projectProgress}%</p>
+                  <p class="box-progress-percentage">${document.getElementById("dynamic-input").value}%</p>
               </div>
               <div class="project-box-footer">
                   <div class="participants">
@@ -135,33 +200,113 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
               </div>
           </div>`
-         //   <div class="project-header">
-          //     <h3>${projectName}</h3>
-          //     <p>Start Date: ${projectStartDate}</p>
-          //     <p>Deadline: ${projectDeadline}</p>
-          //   </div>
-          //   <div class="project-details">
-          //     <p>Progress: ${projectProgress}%</p>
-          //     <p>Days Left: ${projectDaysLeft}</p>
-          //   </div>
-          // `;
-          // Append the new project to the container
+           // Randomly choose a color (could be any logic here)
+      const colors = ['rgba(209, 209, 209, 0.4)', ' #e9ebf0','#fee4cb' ,'#f3f6fd', '#c8f7dc', '#e9e7fd'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+      // Set the background color of the new div
+      newProject.style.backgroundColor = randomColor;
+      newProject.style.margin = "1%";
+      newProject.style.borderRadius = "15px" ;
+
           const projectdiv = document.querySelector(".project-boxes")
           projectdiv.insertBefore(newProject,projectsContainer.firstChild)
-      
+          
           // Close the modal after project creation
           modal.style.display = "none";
       
           // Reset the form fields
           createProjectForm.reset();
+          const moreOption = document.querySelector(".project-btn-more")
+          const moreOptionMenu = document.querySelector(".more-option")
+
+          moreOption.addEventListener("click",function () {
+            moreOptionMenu.style.display = "block";         
         });
-     
-});
+        window.addEventListener("click", function (event) {
+          if (event.target === moreOptionMenu) {
+            moreOptionMenu.style.display = "none"; // Hide the modal
+          }
+        });
+        const closeOptionBtn = document.querySelector(".more-option span");
+
+        closeOptionBtn.addEventListener("click", function () {
+          moreOptionMenu.style.display = "none"; // Hide the modal
+          });
 
 
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-  // Get modal and button elements
-  
-// });
+        // to remove the project using the more option button
+        const moreOptionRemove = document.querySelector(".remove-btn")
+        
+        const projectRemoved = document.querySelector(".project-box-wrapper")
+        const projectSection = document.querySelector(".projects-section")
+
+          moreOptionRemove.addEventListener("click",function () {
+          
+          count -= 1;
+          status.innerHTML = `${count}`
+          projectRemoved.style.display = "none";
+          projectdiv.style.backgroundColor = projectSection.style.backgroundColor;
+          })
+
+          
+       
+        // ***************************Edit page for project Editing **********************************************
+        const moreOptionMenuEdit = document.querySelector(".edit-btn")
+        const modalEdit = document.getElementById("projectModal-Edit");
+
+          moreOptionMenuEdit.addEventListener("click",function () {
+          modalEdit.style.display = "block"; // Show the modal
+          });
+              // Close the modal when the close button is clicked
+        
+          // Close the modal if the user clicks outside the modal content
+          window.addEventListener("click", function (event) {
+            if (event.target === modalEdit) {
+              modalEdit.style.display = "none"; // Hide the modal
+            }
+          });
+          
+          const closeModalEditBtn = document.querySelector(".modalEdit .close-btn");
+    
+          closeModalEditBtn.addEventListener("click", function () {
+          modalEdit.style.display = "none"; // Hide the modal
+        });
+
+          document.getElementById("EditprojectName").value = document.getElementById("projectName").value;
+          document.getElementById("EditprojectDate").value = document.getElementById("projectDate").value; // Start date
+          document.getElementById("EditprojectDeadline").value = document.getElementById("projectDeadline").value; // Deadline date
+          document.getElementById("EditprojectProgress").value = document.getElementById("projectProgress").value;
+          document.getElementById("EditprojectDaysLeft").value = document.getElementById("projectDaysLeft").value;
+        
+        const createProjectEditForm = document.getElementById("createProjectEditForm");
+          createProjectEditForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Get form values
+            const Edited_projectName = document .getElementById("EditprojectName").value;
+            const Edited_projectDate = document.getElementById("EditprojectDate").value; // Start date
+            const Edited_projectDeadline = document.getElementById("EditprojectDeadline").value; // Deadline date
+            const Edited_projectProgress = document.getElementById("EditprojectProgress").value;
+            const Edited_projectDaysLeft = document.getElementById("EditprojectDaysLeft").value;
+          
+            document.querySelector(".box-content-header").textContent = Edited_projectName;
+            document.querySelector(".project-box-header .project-Date").textContent = Edited_projectDate;
+            document.querySelector(".box-progress-percentage").textContent = Edited_projectProgress;
+            document.querySelector(".days-left").textContent = `Days Left : ${Edited_projectDaysLeft}`;
+
+          // Close the modalEdit after project Edition
+          modalEdit.style.display = "none";
+
+            // Reset the form fields
+            createProjectEditForm.reset();
+           })
+          
+           //*********************************************************************************** 
+        });
+        
+    
+  })
+

@@ -71,10 +71,19 @@
                                 <div class="form-group">
                                     <label for="projectDeadline">Deadline : </label>
                                     <input type="date" id="projectDeadline" required><br><br>
+
+
+                                 
                                 </div>
                                 <div class="form-group">
-                                    <label for="projectProgress">Progress (in %):</label>
-                                    <input type="number" id="projectProgress" placeholder="Enter progress percentage" min="0" max="100"  required><br><br>
+                                    <label  class="select-label" for="projectProgress">Project status :</label>
+                                    <select id="projectProgress" >
+                                        <option value="option3">Unknown</option>
+                                        <option value="Upcoming">Upcoming </option>
+                                        <option value="In Progress">In Progress</option>
+                                    </select>
+                                    <div id="inputContainer"></div>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="projectDaysLeft">Days Left:</label>
@@ -86,9 +95,6 @@
                             </form>
                         </div>
                     </div>
-
-
-
                     <button class="notification-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -198,7 +204,9 @@
                     </div>
                 </div>
                 <div class="project-boxes jsGridView">
-                    <div class="project-box-wrapper">
+                    
+                    
+                    <!-- <div class="project-box-wrapper">
                         <div class="project-box" style="background-color: #fee4cb;">
                             <div class="project-box-header">
                                 <span>December 10, 2020</span>
@@ -485,8 +493,42 @@
                                 </div>
                             </div>
                         </div>
+                    </div> -->
+                </div>
+                <div class="modalEdit" id="projectModal-Edit">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeModalBtn">&times;</span>
+                        <h2>Edit The Project</h2>
+                        <form id="createProjectEditForm">
+                            <div class="form-group">
+                                <label for="projectName">Project Name</label>
+                                <input type="text" id="EditprojectName" name="projectName">
+                            </div>
+                            <div class="form-group">
+                                <label for="projectDate">Start Date :</label>
+                                <input type="date" id="EditprojectDate"  ><br><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectDeadline">Deadline : </label>
+                                <input type="date" id="EditprojectDeadline"  ><br><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectProgress">Progress (in %):</label>
+                                <input type="number" id="EditprojectProgress" placeholder="Enter progress percentage" min="0" max="100"  ><br><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectDaysLeft">Days Left:</label>
+                                <input type="number" id="EditprojectDaysLeft" placeholder="Enter days left" ><br><br>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="submit-btn">Save Changes </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
+
+
+
             </div>
             <div class="messages-section">
                 <button class="messages-close">
