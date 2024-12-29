@@ -1,4 +1,18 @@
+let Check = true;
+let variable1 = "";
+let variable2 = 0;
+
+
+
+
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
+  
     var modeSwitch = document.querySelector(".mode-switch");
     modeSwitch.addEventListener("click", function () {
     document.documentElement.classList.toggle("dark");
@@ -61,10 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
           const dropdown = document.getElementById('projectProgress');
           const inputContainer = document.getElementById('inputContainer');
           const selectedValue = dropdown.value;
+        
           let input2 = document.createElement('input');
           let input3 = document.createElement('label');
 
-          let progressValue = 0;
+         
           let UpcomingDate = "";
           // Clear any previously inserted input field
           inputContainer.innerHTML = '';
@@ -83,23 +98,19 @@ document.addEventListener("DOMContentLoaded", function () {
             input2.placeholder = `Enter the progress in %`;
             input2.id = "dynamic-input";
             inputContainer.appendChild(input2);
-          } 
-          
-        }
-  
-        document.querySelector("select").addEventListener("change", insertInputField);
-
-        
+          }         
+        } 
+        document.querySelector("select").addEventListener("change", insertInputField);  
         function getInputValue() {
           const inputField = document.getElementById("dynamic-input");
           if (inputField) {
             const inputValue = inputField.value;
-  
-          } else {
-            alert("No dropdown input field value available");
+           } else {
+            alert("no value")
           }
          
         }
+      
         // document.querySelector("createProjectForm").addEventListener("submit", getInputValue);
 
    
@@ -125,9 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         createProjectForm.addEventListener("submit", function (event) {
           event.preventDefault(); // Prevent default form submission
-          count += 1;
-          const status = document.querySelector(".status-number")
-          status.innerHTML = `${count}`
+         
           // Get form values
           const projectName = document.getElementById("projectName").value;
           const projectStartDate = document.getElementById("projectDate").value; // Start date
@@ -135,6 +144,42 @@ document.addEventListener("DOMContentLoaded", function () {
           const projectProgress = document.getElementById("projectProgress").value;
           const projectDaysLeft = document.getElementById("projectDaysLeft").value;
       
+          console.log(projectProgress);
+          let tag = "";
+          let tag2 = "";
+          let count2 = 0;
+
+
+          const status2 = document.getElementById("upcoming")
+          const status = document.querySelector(".status-number")
+
+          if(projectProgress == "Upcoming"){
+            count2 += 1;
+            
+            status2.innerHTML = `${count2}`
+            tag = document.getElementById("dynamic-input").value
+            tag2 = `
+                  <p class="box-progress-header">Upcoming Project On :</p>
+                  <div class="box-progress-bar">
+                      
+                  </div>
+                  <p class="box-progress-percentage">${tag}</p>
+              `
+          }else if (projectProgress == "In Progress"){
+            count += 1;
+            status.innerHTML = `${count}`
+            tag = `${document.getElementById("dynamic-input").value}%`
+            tag2 = `
+                  <p class="box-progress-header">Progress</p>
+                  <div class="box-progress-bar">
+                      <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
+                  </div>
+                  <p class="box-progress-percentage">${tag}</p>
+              `
+          }
+          const totalproject = count + count2;
+            const status3 = document.getElementById("total-project")
+            status3.innerHTML = `${totalproject}`;
           // Validate inputs
           if (!projectName || !projectStartDate || !projectDeadline || !projectProgress || !projectDaysLeft) {
             alert("Please fill in all fields before creating a project.");
@@ -175,11 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <p class="box-content-subheader">Prototyping</p>
               </div>
               <div class="box-progress-wrapper">
-                  <p class="box-progress-header">Progress</p>
-                  <div class="box-progress-bar">
-                      <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
-                  </div>
-                  <p class="box-progress-percentage">${document.getElementById("dynamic-input").value}%</p>
+                  ${tag2}
               </div>
               <div class="project-box-footer">
                   <div class="participants">
@@ -217,6 +258,8 @@ document.addEventListener("DOMContentLoaded", function () {
       
           // Reset the form fields
           createProjectForm.reset();
+
+
           const moreOption = document.querySelector(".project-btn-more")
           const moreOptionMenu = document.querySelector(".more-option")
 
@@ -241,12 +284,28 @@ document.addEventListener("DOMContentLoaded", function () {
         const moreOptionRemove = document.querySelector(".remove-btn")
         
         const projectRemoved = document.querySelector(".project-box-wrapper")
+        const checkprojectremoved = document.querySelector(".project-box-wrapper .box-progress-percentage")
+        
         const projectSection = document.querySelector(".projects-section")
 
           moreOptionRemove.addEventListener("click",function () {
+
+            
           
-          count -= 1;
-          status.innerHTML = `${count}`
+            if(checkprojectremoved.textContent == "Progress"){
+              if(count > 0){
+                count -= 1;
+                status.innerHTML = `${count}`
+              }
+            }else{
+              if(count2 > 0){
+                count2 -= 1;
+                 status2.innerHTML = `${count2}`
+              }
+            }
+       
+          
+         
           projectRemoved.style.display = "none";
           projectdiv.style.backgroundColor = projectSection.style.backgroundColor;
           })
@@ -307,6 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
            //*********************************************************************************** 
         });
         
-    
-  })
+        
+   
+  });
 
